@@ -1,5 +1,4 @@
 import { FormControl, InputLabel, Select, OutlinedInput, MenuItem, Checkbox, ListItemText } from "@mui/material"
-import { useEffect, useState} from "react"
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -13,35 +12,13 @@ const MenuProps = {
 };
 
 function FilterField(props) {
-    const [filtered, setFiltered] = useState()
-
-
     const handleChange = (event) => {
         
-        //const {
-          //  target: { value },
-          //} = event;
           props.setState(
             event.target.value
           );
-          console.log(props.state)
     }
-    //    let aux = props.state
-    //    console.log(event.target)
-    //    if (aux.includes(event.target.value[0])) {
-    //        console.log("called")
-    //        aux = aux.filter(value => {
-    //            return (value !== event.target.value[0])
-    //        })
-    //        props.setState(aux)
-    //    }
-    //    else {
-    //        console.log("This one called")
-    //        aux.push(event.target.value[0])
-    //        props.setState(aux)
-    //    }
-    //    console.log(props.state)
-    //}
+ 
 
     return(
         <div>

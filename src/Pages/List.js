@@ -64,7 +64,6 @@ function List() {
         let aux = [...displayData]
         Object.keys(sort).map(key => {
             if (sort[key]) {
-                console.log(key)
                 aux.sort((a,b) => {return (sort[key]*(a[key]-b[key]))})
             }
             return null
