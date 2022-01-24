@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Container, Grid, TableSortLabel } from "@mui/material";
+import { Button, CircularProgress, Container, Grid, TableSortLabel, Typography } from "@mui/material";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import BeerCard from "../components/BeerCard"
@@ -89,36 +89,55 @@ function List() {
 
     return (
         <div>
+            <Typography variant="h2" align="center" className="header" sx={{my: 1}}>
+                Beer Database
+            </Typography>
             {loading?
                 <Container sx={{mx: "auto", my: "auto"}}> 
                     <CircularProgress/>
                 </Container>
             :
                 <>
-                <FilterField property= "country" options={getPropertyValues(data, "country")} state= {filteredCountry} setState = {setFilteredCountry}/>
-                <FilterField property= "category" options={getPropertyValues(data, "category")} state= {filteredCategory} setState = {setFilteredCategory}/>
-                <Button name = "abv" onClick = {handleSortClick}>
-                    <TableSortLabel active={sort.abv} direction={sort.abv === 1 ? "asc" : "desc"} sx={{pointerEvents: "none"}}/>
-                    ABV
-                </Button>
-                <Button name = "ibu" onClick = {handleSortClick}>
-                    <TableSortLabel active={sort.ibu} direction={sort.ibu === 1 ? "asc" : "desc"} sx={{pointerEvents: "none"}}/>
-                    IBU
-                </Button>
-                <Grid container sx={{width: "80%", mx: "auto"}}>
-                    {displayData.map ( (beer, index) => {
-                        return (
-                            (index < numberItens) ? 
-                                <Grid item xs={12} md={6}>
-                                    <BeerCard data = {beer}/>
-                                </Grid>
-                            :
-                            null
-                        )
-                    })
-                }
+                <Grid container sx={{width: "80%", mx: "auto", mt: 1}} spacing = {2}>
+                    <Grid item xs={6} container>
+                        <Grid item>
+                            <Typography>Filter</Typography>
+                        </Grid>
+                        <Grid item container>
+                            <FilterField property= "country" options={getPropertyValues(data, "country")} state= {filteredCountry} setState = {setFilteredCountry}/>
+                            <FilterField property= "category" options={getPropertyValues(data, "category")} state= {filteredCategory} setState = {setFilteredCategory}/>
+                        </Grid>
+                    </Grid>
+                    <Grid item xs={6} container  justifyContent="flex-end">
+                        <Grid item container xs={4}>
+                            <Typography>Sort by:</Typography>
+                        </Grid>
+                        <Grid item container justifyContent="flex-end" xs={12}>
+                            <Button name = "abv" onClick = {handleSortClick}>
+                                <TableSortLabel active={Boolean(sort.abv)} direction={sort.abv === 1 ? "asc" : "desc"} sx={{pointerEvents: "none"}}/>
+                                ABV
+                            </Button>
+                            <Button name = "ibu" onClick = {handleSortClick}>
+                                <TableSortLabel active={Boolean(sort.ibu)} direction={sort.ibu === 1 ? "asc" : "desc"} sx={{pointerEvents: "none"}}/>
+                                IBU
+                            </Button>
+                        </Grid>
+                    </Grid>
+                        {displayData.map ( (beer, index) => {
+                            return (
+                                (index < numberItens) ? 
+                                    <Grid item xs={12} md={6} key={beer.name}>
+                                        <BeerCard data = {beer}/>
+                                    </Grid>
+                                :
+                                null
+                            )
+                        })
+                        }
                 </Grid>
-                <Button onClick={handleClick}> Load More </Button>
+                <div className="flex-center">
+                    <Button onClick={handleClick} sx={{m:1}} > Load More </Button>
+                </div> 
                 
                 </>
             }

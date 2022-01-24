@@ -45,7 +45,7 @@ function FilterField(props) {
 
     return(
         <div>
-            <FormControl sx={{ m: 1, width: 300 }}>
+            <FormControl sx={{ m: 1, width: 250 }}>
                 <InputLabel id={`filter-${props.property}-label`}>{props.property}</InputLabel>
                 <Select
                     labelId={`filter-${props.property}-label`}

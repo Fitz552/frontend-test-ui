@@ -1,4 +1,3 @@
-import './App.css';
 import List from './Pages/List';
 
 function App() {
